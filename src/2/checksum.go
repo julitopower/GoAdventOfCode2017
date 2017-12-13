@@ -3,12 +3,12 @@ package main
 import (
 	"fmt"
 	"io/ioutil"
-	"strconv"
 	"sort"
+	"strconv"
 )
 
-func readline(s []byte, offset int) (string, int)  {
-	for i := offset ; i < len(s) ; i++ {
+func readline(s []byte, offset int) (string, int) {
+	for i := offset; i < len(s); i++ {
 		if s[i] == '\n' {
 			return string(s[offset:i]), i + 1
 		}
@@ -18,7 +18,7 @@ func readline(s []byte, offset int) (string, int)  {
 
 func readnumbers(s string) []int {
 	numbers := make([]int, 0)
-	start, offset := 0 0
+	start, offset := 0, 0
 	innumber := true
 	for {
 		if offset >= len(s) || s[offset] == ' ' {
@@ -47,7 +47,7 @@ func main() {
 		line, offset = readline(f, offset)
 		row := readnumbers(line)
 		sort.Ints(row)
-		accum += row[len(row) - 1] - row[0]
+		accum += row[len(row)-1] - row[0]
 		fmt.Println(row, offset)
 		if offset == len(f) {
 			break
