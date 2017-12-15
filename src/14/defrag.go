@@ -69,8 +69,7 @@ func knot_hash(in string) string {
 }
 
 func main() {
-	in := "flqrgnkx"
-	in = "hfdlxzhv"
+	in := "hfdlxzhv"
 	in_arr := make([]string, 128)
 	for i := 0; i < len(in_arr); i++ {
 		in_arr[i] = in + "-" + strconv.Itoa(i)
