@@ -7,16 +7,10 @@ import (
 	"strings"
 )
 
-func main() {
+func dance(str string, input []byte) []byte {
 	in := make([]byte, 16)
-	for i := 0; i < 16; i++ {
-		in[i] = 'a' + byte(i)
-	}
-	fmt.Println(in)
-	content, _ := ioutil.ReadFile("input.txt")
-	str := string(content)
+	copy(in, input)
 	tokens := strings.Split(str, ",")
-
 	for _, token := range tokens {
 		switch token[0] {
 		case 's':
@@ -49,6 +43,32 @@ func main() {
 			in[b] = aux
 		}
 	}
+	return in
+}
 
-	fmt.Println(string(in))
+func main() {
+	in := make([]byte, 16)
+	for i := 0; i < 16; i++ {
+		in[i] = 'a' + byte(i)
+	}
+	fmt.Println(in)
+	content, _ := ioutil.ReadFile("input.txt")
+	str := string(content)
+
+	fmt.Println("Part 1,", string(dance(str, in)))
+
+	cycle_length := 0
+	for i := 0; i < 1000; i++ {
+		in = dance(str, in)
+		if string(in) == "abcdefghijklmnop" {
+			cycle_length = i + 1
+			break
+		}
+	}
+
+	offset := 1000000000 % cycle_length
+	for i := 0; i < offset; i++ {
+		in = dance(str, in)
+	}
+	fmt.Println("Part2,", string(in))
 }
